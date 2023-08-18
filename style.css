@@ -21,18 +21,18 @@ body{
     width: 200px;
     height: 250px ;
     position: absolute;
-    bottom:20px;
-    left: 52px;
+    bottom:5%;
+    left: 10%;
 }
 
 .obstacle{
-    width: 170px;
+    width: 200px;
     height: 280px;
     background-image: url(dragon.png);
     background-size: cover;
     position: absolute;
-    top: 400px;
-    left: 100vw;
+   bottom:5%;
+    left: 80%;
   
 } 
 
@@ -116,3 +116,4 @@ background-color: black;
 .dd{
     display: none;
 }
+
