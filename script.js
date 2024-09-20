@@ -195,6 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         updateScore() {
             this.scoreCont.innerHTML = `Score: ${this.score}`;
+            
+            // Update high score
+            let highScore = localStorage.getItem('highScore') || 0;
+            if (this.score > highScore) {
+                localStorage.setItem('highScore', this.score);
+                // Optionally, notify the player of a new high score
+            }
         }
         
         updateLevel() {
