@@ -34,22 +34,29 @@ body {
 }
 
 .scoreCont, .levelCont {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #f11550;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #f1c40f;
     padding: 10px 20px;
     border-radius: 10px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 #pauseBtn {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #f11550;
+    background-color: #e74c3c;
     color: #fff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+#pauseBtn:hover {
+    background-color: #c0392b;
 }
 
 #pauseBtn:focus {
@@ -67,6 +74,7 @@ body {
     bottom: 5%;
     left: 10%;
     z-index: 5;
+    transition: left 0.3s ease;
 }
 
 /* Obstacle Styles */
@@ -91,6 +99,39 @@ body {
     top: 20%;
     left: 100%;
     z-index: 5;
+    display: none; /* Initially hidden */
+}
+
+/* On-Screen Controls Styles */
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 10;
+}
+
+.controlBtn {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.controlBtn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.controlBtn:focus {
+    outline: none;
 }
 
 /* Animation Classes */
@@ -128,15 +169,16 @@ body {
     top: 40%;
     width: 100%;
     text-align: center;
-    color: bisque;
+    color: #f1c40f;
     font-size: 50px;
     display: none;
     z-index: 10;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
 /* Score and Level Container Styles */
 .scoreCont, .levelCont {
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 /* Collision Effects */
@@ -147,16 +189,30 @@ body {
 .cont {
     background-color: rgba(0, 0, 0, 0.8);
     font-size: 40px;
-    color: #f11550;
-    font-weight: bold;
+    color: #e74c3c;
+    font-weight: 700;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: 2px solid rgb(206, 20, 20);
+    border: 2px solid #e74c3c;
     padding: 20px;
     font-family: 'Ubuntu', sans-serif;
     border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Invincibility Effect */
+.invincible {
+    border: 5px solid #f1c40f;
+    animation: invincibleBlink 1s infinite;
+}
+
+@keyframes invincibleBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 /* Responsive Design */
@@ -178,5 +234,15 @@ body {
 
     .gameOver {
         font-size: 30px;
+    }
+
+    .controls {
+        gap: 10px;
+    }
+
+    .controlBtn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
     }
 }
