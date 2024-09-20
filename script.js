@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
             this.scoreCont = document.querySelector('.scoreCont');
             this.levelCont = document.querySelector('.levelCont');
             this.pauseBtn = document.getElementById('pauseBtn');
+            this.leftBtn = document.getElementById('leftBtn');
+            this.jumpBtn = document.getElementById('jumpBtn');
+            this.rightBtn = document.getElementById('rightBtn');
             
             // Audio Elements
             this.backgroundMusic = document.getElementById('backgroundMusic');
@@ -32,11 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Bind Methods
             this.handleKeyDown = this.handleKeyDown.bind(this);
+            this.handleTouch = this.handleTouch.bind(this);
             this.checkCollision = this.checkCollision.bind(this);
             this.updateScore = this.updateScore.bind(this);
             this.updateLevel = this.updateLevel.bind(this);
             this.togglePause = this.togglePause.bind(this);
             this.spawnPowerUp = this.spawnPowerUp.bind(this);
+            this.moveLeft = this.moveLeft.bind(this);
+            this.moveRight = this.moveRight.bind(this);
+            this.jump = this.jump.bind(this);
             
             // Initialize Game
             this.init();
@@ -44,15 +51,25 @@ document.addEventListener('DOMContentLoaded', () => {
         
         init() {
             // Start background music
+            this.backgroundMusic.volume = 0.5; // Set volume to 50%
             this.backgroundMusic.play();
             
             // Display start message
             this.gameOverText.style.display = 'block';
-            this.gameOverText.innerHTML = "Press Space to Start";
+            this.gameOverText.innerHTML = "Press Space or Tap to Start";
             
             // Event Listeners
             document.addEventListener('keydown', this.handleKeyDown);
             this.pauseBtn.addEventListener('click', this.togglePause);
+            this.leftBtn.addEventListener('click', this.moveLeft);
+            this.jumpBtn.addEventListener('click', this.jump);
+            this.rightBtn.addEventListener('click', this.moveRight);
+            this.gameOverText.addEventListener('click', () => {
+                if (this.isGameOver) return;
+                if (!this.collisionInterval) {
+                    this.start();
+                }
+            });
         }
         
         start() {
@@ -93,9 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
+        handleTouch(e) {
+            // Implement touch controls if needed
+        }
+        
         jump() {
             if (this.dino.classList.contains('animateDino')) return;
             this.dino.classList.add('animateDino');
+            this.jumpSound.currentTime = 0;
             this.jumpSound.play();
             setTimeout(() => {
                 this.dino.classList.remove('animateDino');
@@ -123,7 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Collision with obstacle
             if (this.isIntersecting(dinoRect, obstacleRect)) {
-                this.gameOver();
+                if (!this.powerUpActive) {
+                    this.gameOver();
+                }
             }
             
             // Collision with power-up
@@ -161,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOver() {
             this.isGameOver = true;
             this.gameOverText.style.display = 'block';
-            this.gameOverText.innerHTML = "Game Over - Press F5 to Restart";
+            this.gameOverText.innerHTML = "Game Over - Tap to Restart";
             this.obstacle.classList.remove('obstacleAni');
             this.gameOverAudio.play();
             this.backgroundMusic.pause();
@@ -209,10 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Randomly show power-up
                 this.powerUp.classList.add('powerUpAni');
                 this.powerUp.style.left = '100%';
-                this.powerUp.style.top = `${Math.random() * 50 + 10}%`;
+                this.powerUp.style.top = `${Math.random() * 60 + 10}%`;
                 
+                // Show the power-up
+                this.powerUp.style.display = 'block';
+                
+                // Hide after animation completes
                 setTimeout(() => {
                     this.powerUp.classList.remove('powerUpAni');
+                    this.powerUp.style.display = 'none';
                 }, 5000);
             }, 15000); // Spawn every 15 seconds
         }
@@ -220,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         collectPowerUp() {
             if (this.powerUpActive) return;
             this.powerUpActive = true;
+            this.powerUpSound.currentTime = 0;
             this.powerUpSound.play();
             // Example Power-Up: Temporary invincibility
             this.dino.classList.add('invincible');
