@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunnu gaming - JavaScript Game</title>
+    <title>Tunnu Gaming - Advanced JavaScript Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="gameContainer">
-        <div class="gameOver">Welcome to Tunnu world</div>
-       
+        <div class="header">
+            <div class="scoreCont">Score: 0</div>
+            <div class="levelCont">Level: 1</div>
+            <button id="pauseBtn">Pause</button>
+        </div>
+        <div class="gameOver">Press Space to Start</div>
         <div class="dino"></div>
-        <div class="scoreCont asp">Your Score: 0</div>
         <div class="obstacle obstacleAni"></div>
+        <div class="powerUp powerUpAni"></div>
     </div>
+    
+    <!-- Audio Elements -->
+    <audio id="backgroundMusic" src="assets/audio/tunnu.mp3" loop></audio>
+    <audio id="gameOverAudio" src="assets/audio/gameover.mp3"></audio>
+    <audio id="jumpSound" src="assets/audio/jump.mp3"></audio>
+    <audio id="powerUpSound" src="assets/audio/powerup.mp3"></audio>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
