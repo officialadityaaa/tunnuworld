@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Game Class
     class Game {
         constructor() {
-            // DOM Elements
+            
             this.dino = document.querySelector('.dino');
             this.obstacle = document.querySelector('.obstacle');
             this.powerUp = document.querySelector('.powerUp');
