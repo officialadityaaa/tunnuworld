@@ -2,36 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunnu Gaming - Advanced JavaScript Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> {/* Added user-scalable=no for mobile */}
+    <title>Tunnu's Wacky Runner!</title> {/* Changed Title */}
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="gameContainer">
+    <div class="gameContainer" id="gameContainer"> {/* Added ID */}
         <div class="header">
             <div class="scoreCont">Score: 0</div>
             <div class="levelCont">Level: 1</div>
+            <div class="highScoreCont">High Score: 0</div> {/* Added High Score Display */}
             <button id="pauseBtn">Pause</button>
         </div>
-        <div class="gameOver">Press Space or Tap to Start</div>
-        <div class="dino"></div>
-        <div class="obstacle obstacleAni"></div>
-        <div class="powerUp powerUpAni"></div>
-        
-        <!-- On-Screen Controls for Mobile -->
+        <div class="messageOverlay" id="messageOverlay"> {/* Renamed gameOver */}
+            <span id="messageText">Press Space or Tap to Start</span>
+        </div>
+        <div class="dino" id="dino"></div> {/* Added ID */}
+        <div class="obstacle" id="obstacle"></div> {/* Added ID */}
+        <div class="powerUp" id="powerUp"></div> {/* Added ID */}
+
+        {/* On-Screen Controls for Mobile */}
         <div class="controls">
             <button id="leftBtn" class="controlBtn">⬅️</button>
             <button id="jumpBtn" class="controlBtn">⬆️</button>
             <button id="rightBtn" class="controlBtn">➡️</button>
         </div>
     </div>
-    
-    <!-- Audio Elements -->
-    <audio id="backgroundMusic" src="assets/audio/tunnu.mp3" loop></audio>
-    <audio id="gameOverAudio" src="assets/audio/gameover.mp3"></audio>
-    <audio id="jumpSound" src="assets/audio/jump.mp3"></audio>
-    <audio id="powerUpSound" src="assets/audio/powerup.mp3"></audio>
+
+    <audio id="backgroundMusic" src="assets/audio/tunnu.mp3" loop preload="auto"></audio>
+    <audio id="gameOverAudio" src="assets/audio/gameover.mp3" preload="auto"></audio>
+    <audio id="jumpSound" src="assets/audio/jump.mp3" preload="auto"></audio>
+    <audio id="powerUpSound" src="assets/audio/powerup.mp3" preload="auto"></audio>
 
     <script src="js/script.js"></script>
 </body>
